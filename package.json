@@ -1,11 +1,10 @@
 {
   "name": "vue3-simple-toast",
   "private": false,
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "browser": "./browser/specific/main.js",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "vite",
     "prepare": "rm -rf dist && mkdir dist && tsc",
