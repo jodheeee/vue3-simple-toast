@@ -1,0 +1,7 @@
+node_modules/
+src/
+public/
+tsconfig.json
+tailwind.config.cjs
+vite.config.js
+tsconfig.node.json
