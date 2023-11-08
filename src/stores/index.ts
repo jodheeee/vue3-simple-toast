@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ulid } from 'ulid';
-import type { ToastItem, ToastStore, ToastConfig } from '@/types';
+import type { ToastItem, ToastStore, ToastConfig } from './type';
 
 const toastInitialize: ToastStore = {
   toasts: [],
