@@ -1,0 +1,43 @@
+{
+  "name": "vue3-simple-toast",
+  "version": "0.1.0",
+  "description": "A lightweight toast notification component for Vue 3",
+  "author": "Dae-Hee soso99700@gmail.com",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jodheeee/vue3-simple-toast.git"
+  },
+  "homepage": "https://github.com/jodheeee/vue3-simple-toast#readme",
+  "main": "dist/vue3-simple-toast.umd.js",
+  "module": "dist/vue3-simple-toast.es.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "rimraf dist && vue-tsc -b && vite build",
+    "test": "vitest",
+    "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "typescript": "~5.8.3",
+    "vue-tsc": "^2.2.8",
+    "vitest": "^3.2.3",
+    "rimraf": "^5.0.0"
+  },
+  "keywords": [
+    "vue3",
+    "toast",
+    "notification",
+    "plugin",
+    "vue-component"
+  ],
+  "sideEffects": false
+}
