@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
-import { useToastStore } from '../stores/toast';
+import { useToast } from '../stores/toast';
 import { TOAST_TYPE } from '../constant';
 import type { ToastItem } from '../types/toast';
 
@@ -16,7 +16,7 @@ const props = withDefaults(
   }
 );
 
-const { removeToast } = useToastStore();
+const { removeToast } = useToast();
 const isAutoClosed = !props.toast.isLoading;
 
 onMounted(() => {
