@@ -6,6 +6,8 @@ import type { ToastItem, ToastConfig } from './types/toast';
 const ToastPlugin: Plugin = {
   install(app: App) {
     app.component('ToastContainer', ToastContainer);
+    app.config.globalProperties.$toast = useToast();
+    app.provide('toast', useToast());
   },
 };
 
