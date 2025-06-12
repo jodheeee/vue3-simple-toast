@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useToastStore } from '../stores/toast';
+import { useToast } from '../stores/toast';
 import ToastItem from './ToastItem.vue';
 
-const store = useToastStore();
+const store = useToast();
 </script>
 
 <template>
@@ -30,6 +30,10 @@ const store = useToastStore();
   z-index: 9999;
   width: 100%;
   pointer-events: none;
+}
+
+.toast-wrapper > * {
+  pointer-events: auto;
 }
 
 .toast-enter-active,
