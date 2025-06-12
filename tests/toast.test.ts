@@ -6,17 +6,11 @@ describe('toast store test', () => {
     const store = createToastStoreForTest();
     const message = 'add-toast-test-message';
 
-    console.log('Initial toasts:', store.toasts);
     expect(store.toasts).toStrictEqual([]);
 
     store.toast([message], { id: 'test-toast-id-1' });
-    console.log('After first toast:', store.toasts);
-
     store.toast([message], { id: 'test-toast-id-2' });
-    console.log('After second toast:', store.toasts);
-
     store.toast([message], { id: 'test-toast-id-3' });
-    console.log('After third toast:', store.toasts);
 
     expect(store.toasts).toStrictEqual([
       { message: [message], id: 'test-toast-id-3' },
