@@ -1,6 +1,6 @@
 {
   "name": "vue3-simple-toast",
-  "version": "0.1.0",
+  "version": "0.1.9",
   "description": "A lightweight toast notification component for Vue 3",
   "author": "Dae-Hee soso99700@gmail.com",
   "license": "MIT",
@@ -9,28 +9,31 @@
     "url": "https://github.com/jodheeee/vue3-simple-toast.git"
   },
   "homepage": "https://github.com/jodheeee/vue3-simple-toast#readme",
-  "main": "dist/vue3-simple-toast.umd.js",
+  "main": "dist/vue3-simple-toast.cjs.js",
   "module": "dist/vue3-simple-toast.es.js",
-  "types": "dist/types/index.d.ts",
+  "types": "dist/index.d.ts",
+  "type": "module",
   "files": [
-    "dist"
+    "dist/",
+    "src/"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "rimraf dist && vue-tsc -b && vite build",
-    "test": "vitest",
-    "preview": "vite preview"
+    "build": "vite build && vue-tsc --emitDeclarationOnly",
+    "test": "vitest"
   },
   "peerDependencies": {
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "vite": "^6.3.5",
+    "@types/node": "^24.0.0",
     "@vitejs/plugin-vue": "^5.2.3",
+    "rimraf": "^5.0.0",
+    "rollup-plugin-typescript2": "^0.36.0",
     "typescript": "~5.8.3",
-    "vue-tsc": "^2.2.8",
+    "vite": "^6.3.5",
+    "vite-plugin-dts": "^4.5.4",
     "vitest": "^3.2.3",
-    "rimraf": "^5.0.0"
+    "vue-tsc": "^2.2.8"
   },
   "keywords": [
     "vue3",

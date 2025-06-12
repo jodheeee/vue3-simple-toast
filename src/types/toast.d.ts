@@ -1,4 +1,4 @@
-import type { TOAST_TYPE } from '@/constant';
+import type { TOAST_TYPE } from '../constant';
 
 export interface ToastConfig {
   id?: string;

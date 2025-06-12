@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { useToastStore } from '@/stores/toast';
+import { useToastStore } from '../stores/toast';
 import ToastItem from './ToastItem.vue';
-import { storeToRefs } from 'pinia';
 
 const store = useToastStore();
-const { toasts } = storeToRefs(store);
 </script>
 
 <template>
@@ -12,7 +10,7 @@ const { toasts } = storeToRefs(store);
     <div class="toast-wrapper">
       <TransitionGroup name="toast">
         <ToastItem
-          v-for="toast in toasts"
+          v-for="toast in store.toasts"
           :key="toast.id"
           :toast="toast"
           :type="toast.type"

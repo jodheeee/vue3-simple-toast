@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted } from 'vue';
-import { useToastStore } from '@/stores/toast';
-import { TOAST_TYPE } from '@/constant';
-import type { ToastItem } from '@/types/toast';
+import { useToastStore } from '../stores/toast';
+import { TOAST_TYPE } from '../constant';
+import type { ToastItem } from '../types/toast';
 
 const props = withDefaults(
   defineProps<{

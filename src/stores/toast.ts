@@ -1,43 +1,79 @@
-import { defineStore } from 'pinia';
-import type { ToastItem, ToastStore, ToastConfig } from '@/types/toast';
+import { reactive } from 'vue';
+import type { ToastItem, ToastStore, ToastConfig } from '../types/toast';
 
 let uid = 0;
-const toastInitialize: ToastStore = {
-  toasts: [],
+
+const createToastStore = () => {
+  const toastState = reactive<ToastStore>({
+    toasts: [],
+  });
+
+  const generateId = (): string => {
+    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+      return crypto.randomUUID();
+    }
+    const time = Date.now().toString(36);
+    const count = (++uid).toString(36);
+    return `tst-${time}-${count}`;
+  };
+
+  const addToast = (item: ToastItem): void => {
+    if (!toastState.toasts.find((toast) => toast.id === item.id)) {
+      toastState.toasts.unshift(item);
+
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[Toast] Added:', item, 'Total:', toastState.toasts.length);
+      }
+    }
+  };
+
+  const removeToast = (id: ToastItem['id']): void => {
+    const index = toastState.toasts.findIndex((toast) => toast.id === id);
+    if (index !== -1) {
+      toastState.toasts.splice(index, 1);
+
+      if (process.env.NODE_ENV === 'development') {
+        console.log('[Toast] Removed:', id, 'Total:', toastState.toasts.length);
+      }
+    }
+  };
+
+  const clearToast = (): void => {
+    toastState.toasts.splice(0, toastState.toasts.length);
+  };
+
+  const toast = (message: ToastItem['message'], config?: ToastConfig): void => {
+    const id = config?.id ?? generateId();
+    addToast({ id, message, ...config });
+  };
+
+  return {
+    toasts: toastState.toasts,
+    addToast,
+    removeToast,
+    clearToast,
+    toast,
+    generateId,
+  };
 };
 
-export const useToastStore = defineStore('toast', {
-  state: () => ({
-    ...toastInitialize,
-  }),
+let globalToastStore: ReturnType<typeof createToastStore> | null = null;
 
-  actions: {
-    generateId(): string {
-      if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
-        return crypto.randomUUID();
-      }
-      const time = Date.now().toString(36);
-      const count = (++uid).toString(36);
-      return `tst-${time}-${count}`;
-    },
+const isSSR = typeof window === 'undefined';
 
-    addToast(item: ToastItem): void {
-      if (!this.toasts.find((toast) => toast.id === item.id)) {
-        this.toasts = [item, ...this.toasts];
-      }
-    },
+export const useToast = () => {
+  if (isSSR) {
+    return createToastStore();
+  }
 
-    removeToast(id: ToastItem['id']): void {
-      this.toasts = this.toasts.filter((toast) => toast.id !== id);
-    },
+  if (!globalToastStore) {
+    globalToastStore = createToastStore();
+  }
+  return globalToastStore;
+};
 
-    clearToast(): void {
-      this.toasts = [];
-    },
+export const createToastStoreForTest = () => {
+  return createToastStore();
+};
 
-    toast(message: ToastItem['message'], config?: ToastConfig): void {
-      const id = config?.id ?? this.generateId();
-      this.addToast({ id, message, ...config });
-    },
-  },
-});
+export type UseToastReturn = ReturnType<typeof useToast>;
