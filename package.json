@@ -17,6 +17,13 @@
     "dist/",
     "src/"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/vue3-simple-toast.es.js",
+      "require": "./dist/vue3-simple-toast.cjs.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "vite build && vue-tsc --emitDeclarationOnly",
     "test": "vitest"
