@@ -21,7 +21,7 @@ const createToastStore = () => {
     if (!toastState.toasts.find((toast) => toast.id === item.id)) {
       toastState.toasts.unshift(item);
 
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.log('[Toast] Added:', item, 'Total:', toastState.toasts.length);
       }
     }
@@ -32,7 +32,7 @@ const createToastStore = () => {
     if (index !== -1) {
       toastState.toasts.splice(index, 1);
 
-      if (process.env.NODE_ENV === 'development') {
+      if (import.meta.env.DEV) {
         console.log('[Toast] Removed:', id, 'Total:', toastState.toasts.length);
       }
     }
@@ -63,7 +63,7 @@ const isSSR = typeof window === 'undefined';
 
 export const useToast = () => {
   if (isSSR) {
-    return createToastStore();
+    throw new Error('useToast cannot be used in SSR context');
   }
 
   if (!globalToastStore) {
