@@ -9,7 +9,7 @@ export interface ToastConfig {
 }
 
 export interface ToastItem extends ToastConfig {
-  message: string[];
+  message: string | string[];
 }
 
 export interface ToastStore {
